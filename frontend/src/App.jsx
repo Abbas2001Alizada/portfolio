@@ -1,0 +1,23 @@
+import React from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Portfolio from './components/portfolio';
+import Contact from './components/contact';
+import Login from './components/login';
+import Skill from './components/Skill';
+
+const App = () => {
+  return (
+    <div className=" font-sans antialiased bg-white text-gray-900">
+      <Navbar />
+      <Home />
+      <About/>
+      <Portfolio />
+      <Skill/>
+      <Contact />
+    </div>
+  );
+};
+
+export default App;

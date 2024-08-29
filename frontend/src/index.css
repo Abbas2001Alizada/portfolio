@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@font-face {
+  font-family: 'Hamilton Script';
+  src: url('../public/fonts/Hamilton.ttf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Beanco Script';
+  src: url('/fonts/BeancoScript-Regular.woff2') format('woff2'),
+       url('/fonts/BeancoScript-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Beanco Script';
+  src: url('/fonts/BeancoScript-Bold.woff2') format('woff2'),
+       url('/fonts/BeancoScript-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Peristiwa';
+  src: url('/public/fonts/Peristiwa-BF64723cfa7f6a9.otf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Peristiwa';
+  src: url('/public/fonts/Peristiwa-BF64723cfa7f6a9.otf') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
