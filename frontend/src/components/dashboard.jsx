@@ -1,6 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useMatch, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { IoIosLogOut } from "react-icons/io";
+import { FaBars } from "react-icons/fa";
 import CreateProject from "./createProject";
 import DeleteProject from "./delete";
 import Portfolio from "./portfolio";
@@ -10,22 +11,23 @@ const AdminDashboard = () => {
   const token = sessionStorage.getItem("token");
   const [selectedOption, setSelectedOption] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
-  const useLogout = () => {
-    const logout = () => {
-      navigate("/");
-      sessionStorage.removeItem("token");
-    };
-    return logout;
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    navigate("/");
   };
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
-  }, []);
+  }, [token, navigate]);
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setDropdownOpen(false); // Close dropdown when an option is selected
+  };
 
   return (
     <div
@@ -35,105 +37,131 @@ const AdminDashboard = () => {
       {/* Navbar */}
       <nav
         dir="rtl"
-        className="bg-gray-950 text-white p-4 flex justify-between items-center text center"
+        className="bg-gray-950 text-white p-4 flex justify-between items-center"
       >
-        <div>
-          {" "}
+        <div className="flex items-center">
+          {/* Hamburger Menu for Mobile */}
           <button
-            onClick={useLogout()}
-            className=" mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-red-500"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className="text-2xl font-bold md:hidden"
           >
-            logout
-          </button>          <button
-            onClick=''
-            className=" mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-blue-500"
+            <FaBars />
+          </button>
+
+          <button
+            onClick={logout}
+            className="flex items-center mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-red-500"
           >
-            Edite cridential
+            Logout <IoIosLogOut className="ml-1" />
+          </button>
+          <button className="mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-blue-500">
+            Edit Credentials
           </button>
         </div>
-        <div className="items center w-full">
-          <p className="text-center italic font-bold animate-pulse opacity-0 duration-100 sm:text-xl md:text-2xl lg:text-4xl">
-            My Porfolio
+        <div className="flex-1 flex justify-center items-center">
+          <p className="text-center italic font-bold animate-pulse text-white opacity-80 sm:text-xl md:text-2xl lg:text-4xl">
+            My Portfolio
           </p>
         </div>
       </nav>
 
-      <div className="flex flex-grow flex-col md:flex-row">
-        {/* Hamburger Menu for Mobile */}
-        <div className="bg-gray-950 text-white p-4 md:hidden flex justify-between items-center">
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-xl font-bold"
-          >
-            ☰
-          </button>
-        </div>
-
-        {/* Sidebar */}
-        <aside
-          className={`bg-gray-900 text-white l  p-4 transform ${
-            sidebarOpen
-              ? "translate-x-0 z-20"
-              : "hidden md:flex lg:flex -translate-x-full"
-          } hi md:translate-x-0 transition-transform duration-300 ease-in-out`}
-        >
+      {/* Dropdown Menu (Visible in Mobile Mode) */}
+      {dropdownOpen && (
+        <div className="bg-gray-900 text-white p-4 md:hidden">
           <ul>
             <li
               className={`p-2 cursor-pointer ${
-                selectedOption === "CreateAppointment" && "bg-gray-600"
+                selectedOption === "UpdateResume" && "bg-gray-600"
+              }`}
+              onClick={() => handleOptionClick("UpdateResume")}
+            >
+              Update Resume
+            </li>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "AddProject" && "bg-gray-600"
+              }`}
+              onClick={() => handleOptionClick("AddProject")}
+            >
+              Add Project
+            </li>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "DeleteProject" && "bg-gray-600"
+              }`}
+              onClick={() => handleOptionClick("DeleteProject")}
+            >
+              Delete Project
+            </li>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "Messages" && "bg-gray-600"
+              }`}
+              onClick={() => handleOptionClick("Messages")}
+            >
+              Messages
+            </li>
+          </ul>
+        </div>
+      )}
+
+      <div className="flex flex-grow flex-col md:flex-row">
+        {/* Sidebar (Hidden on Mobile) */}
+        <aside className="bg-gray-900 text-white p-4 hidden md:block md:w-64">
+          <ul>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "UpdateResume" && "bg-gray-600"
               }`}
               onClick={() => setSelectedOption("UpdateResume")}
             >
-              Update Resume{" "}
+              Update Resume
             </li>
             <li
               className={`p-2 cursor-pointer ${
-                selectedOption === "CreateAccount" && "bg-gray-600"
+                selectedOption === "AddProject" && "bg-gray-600"
               }`}
               onClick={() => setSelectedOption("AddProject")}
             >
-              Add Project{" "}
-            </li>
-            <li
-              className={`p-2 cursor-pointer mt-2 ${
-                selectedOption === "DeleteAccount" && "bg-gray-600"
-              }`}
-              onClick={() => setSelectedOption("DeleteProject")}
-            >
-              Delete Project{" "}
+              Add Project
             </li>
             <li
               className={`p-2 cursor-pointer ${
-                selectedOption === "report" && "bg-gray-600"
+                selectedOption === "DeleteProject" && "bg-gray-600"
+              }`}
+              onClick={() => setSelectedOption("DeleteProject")}
+            >
+              Delete Project
+            </li>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "Messages" && "bg-gray-600"
               }`}
               onClick={() => setSelectedOption("Messages")}
             >
-              Messages{" "}
+              Messages
             </li>
           </ul>
         </aside>
 
         {/* Main Content */}
         <main className="flex-grow bg-gray-100 p-4">
-          {selectedOption === "AddProject" ? (
-            <section className="dir-rtl">
+          {selectedOption === "AddProject" && (
+            <section dir="rtl">
               <CreateProject />
             </section>
-          ) : selectedOption === "DeleteProject" ? (
+          )}
+          {selectedOption === "DeleteProject" && (
             <section>
               <DeleteProject />
               <Portfolio />
             </section>
-          ) : selectedOption === "UpdateResume" ? (
-            <section></section>
-          ) : selectedOption === "Messages" ? (
+          )}
+          {selectedOption === "UpdateResume" && <section></section>}
+          {selectedOption === "Messages" && (
             <section>
               <Messages />
             </section>
-          ) : selectedOption === "users" ? (
-            <section></section>
-          ) : (
-            <section></section>
           )}
         </main>
       </div>

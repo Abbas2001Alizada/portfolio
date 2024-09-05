@@ -51,12 +51,13 @@ const Navbar = () => {
                 leaveTo="opacity-0 scale-95"
             >
                 {ref => (
-                    <div className="md:hidden" id="mobile-menu">
-                        <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <div className="md:hidden " id="mobile-menu">
+                        <div ref={ref} className=" px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             <a href="#about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">About</a>
                             <a href="#portfolio" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">Projects</a>
                             <a href="#skills" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">Skills</a>
                             <a href="#contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">Contact</a>
+                            <a href="#resume" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">resume</a>
                         </div>
                     </div>
                 )}

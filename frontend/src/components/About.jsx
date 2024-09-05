@@ -17,13 +17,11 @@ const About = () => {
         <div className="w-full sm:w-2/3 lg:w-1/2 p-8 bg-black rounded-r-lg ">
           <h2 className="text-white text-2xl md:text-4xl font-bold font-hamilton mb-4 animate-pulse">About Me</h2>
           <p className="text-sm md:text-lg mb-4 text-white ">
-            Frontend is the primary vision that either attracts the user or makes
-            the user to close the application forever. working on frontend is my majore and interest.
-          </p>
-          <p className="text-sm md:text-base text-white animate-blink">
+          I am Abbas Alizada from Kabul Afghanistan. I have bachelor of computer science in Informations system department.I have graduated recently from Kabul Polytechnic University. My work experience is on my github and on this page bellow.  </p>
+          {/* <p className="text-sm md:text-base text-white animate-blink">
             Working on several projects that are on my GitHub, made to learn lots of
             titles I still did not see.
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="flex justify-center items-center w-full align-center ">
