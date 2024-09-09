@@ -6,6 +6,7 @@ import { FaGithubSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
 import axios from "axios";
+import DownloadResume from "./downloadeResume";
 
 const Contact = () => {
   const [hovered, setIsHovered] = useState(false);
@@ -143,6 +144,7 @@ setFormData({ name: '', email: '', message: '' });
             LinkedIn: www.linkedin.com/in/abbas-alizadah-40aa3a198
           </a>
         </div>
+          <DownloadResume/>
       </div>
     </section>
   );

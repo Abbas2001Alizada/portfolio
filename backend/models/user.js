@@ -15,7 +15,10 @@ import { DataTypes } from "sequelize";
     email: {
         type: DataTypes.STRING,
         allowNull: true
-    }, resume: {
+    }, token: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },  resetPasswordExpires: {
         type: DataTypes.STRING,
         allowNull: true
     }, 

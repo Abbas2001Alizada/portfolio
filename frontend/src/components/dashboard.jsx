@@ -6,6 +6,7 @@ import CreateProject from "./createProject";
 import DeleteProject from "./delete";
 import Portfolio from "./portfolio";
 import Messages from "./Message";
+import ResumeUpload from "./resumeUpload";
 
 const AdminDashboard = () => {
   const token = sessionStorage.getItem("token");
@@ -28,7 +29,9 @@ const AdminDashboard = () => {
     setSelectedOption(option);
     setDropdownOpen(false); // Close dropdown when an option is selected
   };
-
+const handleEdite=()=>{
+  navigate("/editeCridentials")
+}
   return (
     <div
       dir="ltr"
@@ -54,7 +57,7 @@ const AdminDashboard = () => {
           >
             Logout <IoIosLogOut className="ml-1" />
           </button>
-          <button className="mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-blue-500">
+          <button onClick={handleEdite} className="mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-blue-500">
             Edit Credentials
           </button>
         </div>
@@ -157,7 +160,9 @@ const AdminDashboard = () => {
               <Portfolio />
             </section>
           )}
-          {selectedOption === "UpdateResume" && <section></section>}
+          {selectedOption === "UpdateResume" && <section>
+            
+            <ResumeUpload/></section>}
           {selectedOption === "Messages" && (
             <section>
               <Messages />

@@ -6,6 +6,10 @@ import Portfolio from './components/portfolio';
 import Contact from './components/contact';
 import Login from './components/login';
 import Skill from './components/Skill';
+import DownloadResume from './components/downloadeResume';
+import ForgotPassword from './components/forgotPassword';
+import ResetPassword from './components/resetPassword';
+import UpdateCredentials from './components/update cridential';
 
 const App = () => {
   return (
@@ -16,6 +20,7 @@ const App = () => {
       <Portfolio />
       <Skill/>
       <Contact />
+      <UpdateCredentials/>
     </div>
   );
 };

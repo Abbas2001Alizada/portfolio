@@ -7,14 +7,29 @@ const CreateProject = () => {
   const [githubUrl, setGithubUrl] = useState('');
   const [photo, setPhoto] = useState(null);
   const [message, setMessage] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleFileChange = (e) => {
     setPhoto(e.target.files[0]);
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!name) newErrors.name = 'Project name is required';
+    if (!description) newErrors.description = 'Description is required';
+    if (!githubUrl) newErrors.githubUrl = 'GitHub URL is required';
+    if (!photo) newErrors.photo = 'Project photo is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    if (!validateForm()) {
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
@@ -24,8 +39,8 @@ const CreateProject = () => {
     try {
       const response = await axios.post('http://localhost:3002/project/create', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data',
+        },
       });
       
       setMessage('Project created successfully!');
@@ -36,6 +51,7 @@ const CreateProject = () => {
       setDescription('');
       setGithubUrl('');
       setPhoto(null);
+      setErrors({});
     } catch (error) {
       setMessage(error.response.data.error);
       console.error('There was an error!', error);
@@ -43,10 +59,10 @@ const CreateProject = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-gray-200">
+    <div dir='ltr' className="max-w-md mx-auto p-6 bg-gray-900 text-white rounded-lg shadow-lg mt-10">
       <h2 className="text-2xl font-bold mb-4">Create New Project</h2>
       
-      {message && <p className="mb-4 text-green-500">{message}</p>}
+      {message && <p className="mb-4 text-green-400">{message}</p>}
       
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -54,22 +70,24 @@ const CreateProject = () => {
           <input 
             type="text" 
             id="name" 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            className="w-full p-2 text-black border border-gray-400 rounded focus:outline-none" 
             value={name} 
             onChange={(e) => setName(e.target.value)} 
             required 
           />
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
         
         <div className="mb-4">
           <label className="block text-sm font-bold mb-2" htmlFor="description">Description</label>
           <textarea 
             id="description" 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            className="w-full p-2 text-black border border-gray-400 rounded focus:outline-none" 
             value={description} 
             onChange={(e) => setDescription(e.target.value)} 
             required 
           />
+          {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
         </div>
 
         <div className="mb-4">
@@ -77,11 +95,12 @@ const CreateProject = () => {
           <input 
             type="url" 
             id="githubUrl" 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            className="w-full p-2 text-black border border-gray-400 rounded focus:outline-none" 
             value={githubUrl} 
             onChange={(e) => setGithubUrl(e.target.value)} 
             required 
           />
+          {errors.githubUrl && <p className="text-red-500 text-sm">{errors.githubUrl}</p>}
         </div>
         
         <div className="mb-4">
@@ -89,16 +108,17 @@ const CreateProject = () => {
           <input 
             type="file" 
             id="photo" 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+            className="w-full p-2 text-white border border-gray-400 rounded focus:outline-none" 
             onChange={handleFileChange} 
-           
+            required
           />
+          {errors.photo && <p className="text-red-500 text-sm">{errors.photo}</p>}
         </div>
 
         <div className="mb-4">
           <button 
             type="submit" 
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300">
             Create Project
           </button>
         </div>

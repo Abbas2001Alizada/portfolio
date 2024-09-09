@@ -7,7 +7,7 @@ projectrouter.post('/login',(req,res)=>{
     res.json("done")
 })
 projectrouter.get('/',getAllprojects)
-projectrouter.delete('/delete/:name',deleteProjectByName)
+projectrouter.delete('/delete/:projectName',deleteProjectByName)
 
 
 

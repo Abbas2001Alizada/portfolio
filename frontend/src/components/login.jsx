@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,13 +20,10 @@ const Login = () => {
       const state = response.data.message;
       const token = response.data.token;
       sessionStorage.setItem("token", token);
-      if (state == "OK") {
+      if (state === "OK") {
         navigate("/dashboard");
-
         setMessage("Login successful!");
       }
-
-      // Optionally, you can redirect the user or perform other actions here
     } catch (err) {
       setError("Login failed. Please check your credentials and try again.");
       console.error("Error:", err);
@@ -94,12 +91,12 @@ const Login = () => {
               </label>
             </div>
             <div className="text-sm">
-              <a
-                href="#"
+              <Link
+                to="/forgot-password"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
           <div>

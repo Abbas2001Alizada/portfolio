@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import mailrouter from './rout/mailRout.js';
 import MessageRouter from './rout/Message.js';
 import UserRouter from './rout/userRout.js';
+import resumerouter from './rout/resumeRout.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -24,6 +25,7 @@ app.use('/project',projectrouter)
 app.use('/sendMail',mailrouter)
 app.use('/messages',MessageRouter)
 app.use('/user',UserRouter)
+app.use('/resume',resumerouter)
 
 
 sequelize.sync({alter:true})
