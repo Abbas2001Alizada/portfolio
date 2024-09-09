@@ -27,7 +27,7 @@ const DownloadResume = () => {
   return (
  <button
           onClick={handleDownload}
-          className="ml-4 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+          className="ml-4 bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
         >
           Download Resume
         </button>
