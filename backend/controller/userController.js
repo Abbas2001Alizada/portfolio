@@ -99,7 +99,7 @@ export const forgotPassword = async (req, res) => {
     await user.save();
 
     // Send email
-    const resetURL = `http://localhost:5173/reset-password/${token}`;
+    const resetURL = `http://localhost:452/reset-password/${token}`;
     await sendEmail({
       to: email,
       subject: 'Password Reset',

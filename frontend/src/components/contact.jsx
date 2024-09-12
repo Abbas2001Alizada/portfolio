@@ -88,7 +88,7 @@ setFormData({ name: '', email: '', message: '' });
           </div>
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded hover:bg-blue-600"
+            className="w-full bg-black text-white py-2 rounded hover:bg-gray-700"
           >
             Send
           </button>

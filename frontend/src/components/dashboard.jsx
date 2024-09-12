@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IoIosLogOut } from "react-icons/io";
+import { BiLogOut } from "react-icons/bi";
 import { FaBars } from "react-icons/fa";
 import CreateProject from "./createProject";
 import DeleteProject from "./delete";
 import Portfolio from "./portfolio";
 import Messages from "./Message";
 import ResumeUpload from "./resumeUpload";
+import { FaRegEdit } from "react-icons/fa";
 
 const AdminDashboard = () => {
   const token = sessionStorage.getItem("token");
@@ -29,9 +30,9 @@ const AdminDashboard = () => {
     setSelectedOption(option);
     setDropdownOpen(false); // Close dropdown when an option is selected
   };
-const handleEdite=()=>{
-  navigate("/editeCridentials")
-}
+  const handleEdite = () => {
+    navigate("/editeCridentials");
+  };
   return (
     <div
       dir="ltr"
@@ -51,15 +52,18 @@ const handleEdite=()=>{
             <FaBars />
           </button>
 
-          <button
-            onClick={logout}
-            className="flex items-center mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-red-500"
-          >
-            Logout <IoIosLogOut className="ml-1" />
-          </button>
-          <button onClick={handleEdite} className="mx-1 bg-white text-black rounded-lg px-2 m-1 hover:bg-blue-500">
-            Edit Credentials
-          </button>
+          <div className="flex md:grid">
+            <button
+              onClick={logout}
+              className="rounded-full flex items-center mx-1 bg-white text-black px-2 m-1 hover:bg-red-500"
+            > <BiLogOut  className="m-1" />
+            </button>
+            <button
+              onClick={handleEdite}
+              className="rounded-full mx-1 bg-white text-black px-2 m-1 hover:bg-blue-500"
+            ><FaRegEdit className="m-1"/>
+            </button>
+          </div>
         </div>
         <div className="flex-1 flex justify-center items-center">
           <p className="text-center italic font-bold animate-pulse text-white opacity-80 sm:text-xl md:text-2xl lg:text-4xl">
@@ -160,9 +164,11 @@ const handleEdite=()=>{
               <Portfolio />
             </section>
           )}
-          {selectedOption === "UpdateResume" && <section>
-            
-            <ResumeUpload/></section>}
+          {selectedOption === "UpdateResume" && (
+            <section>
+              <ResumeUpload />
+            </section>
+          )}
           {selectedOption === "Messages" && (
             <section>
               <Messages />
