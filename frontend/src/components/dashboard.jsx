@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaRegEdit, FaRegFileAlt, FaPlusCircle, FaTrashAlt, FaEnvelope, FaEdit } from "react-icons/fa"; // Import icons
 import CreateProject from "./createProject";
-import DeleteProject from "./delete";
-import Portfolio from "./portfolio";
+import Portfolio from "./deleteProject";
 import Messages from "./Message";
 import ResumeUpload from "./resumeUpload";
-import { FaRegEdit } from "react-icons/fa";
+import EditProject from "./editeProject"; // Import the EditProject component
 
 const AdminDashboard = () => {
   const token = sessionStorage.getItem("token");
@@ -30,9 +29,11 @@ const AdminDashboard = () => {
     setSelectedOption(option);
     setDropdownOpen(false); // Close dropdown when an option is selected
   };
+
   const handleEdite = () => {
     navigate("/editeCridentials");
   };
+
   return (
     <div
       dir="ltr"
@@ -56,12 +57,14 @@ const AdminDashboard = () => {
             <button
               onClick={logout}
               className="rounded-full flex items-center mx-1 bg-white text-black px-2 m-1 hover:bg-red-500"
-            > <BiLogOut  className="m-1" />
+            >
+              <BiLogOut className="m-1" />
             </button>
             <button
               onClick={handleEdite}
               className="rounded-full mx-1 bg-white text-black px-2 m-1 hover:bg-blue-500"
-            ><FaRegEdit className="m-1"/>
+            >
+              <FaRegEdit className="m-1" />
             </button>
           </div>
         </div>
@@ -82,7 +85,7 @@ const AdminDashboard = () => {
               }`}
               onClick={() => handleOptionClick("UpdateResume")}
             >
-              Update Resume
+              <FaRegFileAlt className="inline mr-2" /> Update Resume
             </li>
             <li
               className={`p-2 cursor-pointer ${
@@ -90,7 +93,7 @@ const AdminDashboard = () => {
               }`}
               onClick={() => handleOptionClick("AddProject")}
             >
-              Add Project
+              <FaPlusCircle className="inline mr-2" /> Add Project
             </li>
             <li
               className={`p-2 cursor-pointer ${
@@ -98,7 +101,15 @@ const AdminDashboard = () => {
               }`}
               onClick={() => handleOptionClick("DeleteProject")}
             >
-              Delete Project
+              <FaTrashAlt className="inline mr-2" /> Delete Project
+            </li>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "EditProject" && "bg-gray-600"
+              }`}
+              onClick={() => handleOptionClick("EditProject")}
+            >
+              <FaEdit className="inline mr-2" /> Edit Project
             </li>
             <li
               className={`p-2 cursor-pointer ${
@@ -106,7 +117,7 @@ const AdminDashboard = () => {
               }`}
               onClick={() => handleOptionClick("Messages")}
             >
-              Messages
+              <FaEnvelope className="inline mr-2" /> Messages
             </li>
           </ul>
         </div>
@@ -122,7 +133,7 @@ const AdminDashboard = () => {
               }`}
               onClick={() => setSelectedOption("UpdateResume")}
             >
-              Update Resume
+              <FaRegFileAlt className="inline mr-2" /> Update Resume
             </li>
             <li
               className={`p-2 cursor-pointer ${
@@ -130,7 +141,7 @@ const AdminDashboard = () => {
               }`}
               onClick={() => setSelectedOption("AddProject")}
             >
-              Add Project
+              <FaPlusCircle className="inline mr-2" /> Add Project
             </li>
             <li
               className={`p-2 cursor-pointer ${
@@ -138,7 +149,15 @@ const AdminDashboard = () => {
               }`}
               onClick={() => setSelectedOption("DeleteProject")}
             >
-              Delete Project
+              <FaTrashAlt className="inline mr-2" /> Delete Project
+            </li>
+            <li
+              className={`p-2 cursor-pointer ${
+                selectedOption === "EditProject" && "bg-gray-600"
+              }`}
+              onClick={() => setSelectedOption("EditProject")}
+            >
+              <FaEdit className="inline mr-2" /> Edit Project
             </li>
             <li
               className={`p-2 cursor-pointer ${
@@ -146,7 +165,7 @@ const AdminDashboard = () => {
               }`}
               onClick={() => setSelectedOption("Messages")}
             >
-              Messages
+              <FaEnvelope className="inline mr-2" /> Messages
             </li>
           </ul>
         </aside>
@@ -160,8 +179,12 @@ const AdminDashboard = () => {
           )}
           {selectedOption === "DeleteProject" && (
             <section>
-              <DeleteProject />
               <Portfolio />
+            </section>
+          )}
+          {selectedOption === "EditProject" && (
+            <section>
+              <EditProject /> {/* New component for editing projects */}
             </section>
           )}
           {selectedOption === "UpdateResume" && (

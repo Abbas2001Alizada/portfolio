@@ -57,7 +57,7 @@ const Navbar = () => {
                             <a onClick={toggleMenu} href="#portfolio" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">Projects</a>
                             <a onClick={toggleMenu} href="#skills" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">Skills</a>
                             <a onClick={toggleMenu} href="#contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">Contact</a>
-                            <a onClick={toggleMenu} href="#resume" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-100">resume</a>
+                        
                         </div>
                     </div>
                 )}

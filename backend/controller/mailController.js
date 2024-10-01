@@ -45,6 +45,7 @@ export const mailer = async (req, res) => {
                     name,
                     email,
                     message,
+                    deleted:false
                 });
             } catch (dbError) {
                 console.error('Error saving to database:', dbError);

@@ -158,7 +158,7 @@ const UpdateCredentials = () => {
               className="w-full py-2 px-4 bg-gray-600 text-white font-bold rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-300"
               onClick={handleGoBack}
             >
-              Go Back
+              Back
             </button>
           </div>
         </form>

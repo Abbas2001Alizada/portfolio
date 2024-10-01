@@ -95,7 +95,7 @@ setFormData({ name: '', email: '', message: '' });
         </form>
       </div>
       <div className="py-4 content-center ">
-        <div className=" px-4     flex ">
+        <div className="px-4 flex ">
           <MdEmail
             className={` ${hovered? "animate-none":"animate-bounce"}  `}
             size={24}

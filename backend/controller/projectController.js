@@ -3,6 +3,36 @@ import { Project } from "../models/project.js";
 import fs from 'fs';
 import path from 'path';import { fileURLToPath } from 'url';
 
+// ES6 arrow function to edit a project
+export const editProject = async (req, res) => {
+  const { id } = req.params; // Destructure project ID from request parameters
+  const { name, description, githubUrl } = req.body; // Destructure updated project details from request body
+
+  try {
+    // Find the project by its ID
+    const project = await Project.findByPk(id);
+
+    // If project not found, return a 404 error
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    // Update the project with new data or retain existing values
+    await project.update({
+      name: name || project.name,
+      description: description || project.description,
+      githubUrl: githubUrl || project.githubUrl,
+    });
+
+    // Send success response with updated project details
+    return res.status(200).json({ message: 'Project updated successfully', project });
+  } catch (error) {
+    console.error('Error updating project:', error);
+    return res.status(500).json({ error: 'An error occurred while updating the project' });
+  }
+};
+
+
 // Fix for ES module: Calculate __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,14 +70,14 @@ export const getAllprojects = async (req, res) => {
 
 // Delete a project by its name and associated image file
 export const deleteProjectByName = async (req, res) => {
-  const {projectName } = req.params;
+  const {deleteConfirmation} = req.params;
   try {
+    console.log(deleteConfirmation);
     // Find the project by its name
-    console.log("name:" ,projectName);
-    const project = await Project.findOne({ where: { name:projectName } });
+    const project = await Project.findOne({ where: {id:deleteConfirmation} });
 
     if (!project) {
-      return res.status(404).json({ error: `Project with name "${projectName}" not found.` });
+      return res.status(404).json({ error: `Project with name "${project.name}" not found.` });
     }
 
     // Retrieve the image path from the project
@@ -68,10 +98,11 @@ export const deleteProjectByName = async (req, res) => {
     }
 
     // Delete the project record from the database
-    await Project.destroy({ where: { name:projectName } });
+    await Project.destroy({ where: { id:deleteConfirmation} });
 
-    res.status(200).json({ message: `Project "${projectName}" and its associated image deleted successfully.` });
+    res.status(200).json({ message: `Project "${project.name}" and its associated image deleted successfully.` });
   } catch (err) {
+    
     console.error(err);
     res.status(500).json({ error: 'An error occurred while deleting the project.' });
   }

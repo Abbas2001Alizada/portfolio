@@ -44,7 +44,6 @@ const CreateProject = () => {
       });
       
       setMessage('Project created successfully!');
-      console.log(response.data);
       
       // Clear form fields
       setName('');
